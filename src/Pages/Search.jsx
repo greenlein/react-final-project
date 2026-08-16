@@ -11,9 +11,11 @@ import fakeInfo from "../assets/fake-movie-info.json";
 import { useSearchParams } from "react-router-dom";
 import { API_KEY } from "../assets/API_KEY.js";
 import axios from "axios";
+import convertRating from "../Components/convertRating.jsx";
 
 function Search() {
   const [searchData, setSearchData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("search_query");
 
@@ -28,7 +30,6 @@ function Search() {
       `http://www.omdbapi.com/?s=${searchQuery}&apikey=${API_KEY}`,
     );
     const searchRes = data.Search.filter((item) => item.Type === "movie");
-    console.log(searchRes);
 
     const combinedData = await Promise.all(
       searchRes.map(async (movie) => {
@@ -40,7 +41,9 @@ function Search() {
     );
 
     setSearchData(combinedData);
+    setLoading(false);
   }
+  console.log(searchData);
 
   useEffect(() => {
     fetchSearchData();
@@ -59,16 +62,36 @@ function Search() {
                 Sort By:
               </option>
               <option value="A_Z">Alphabetically: A - Z</option>
-              <option value="Z_A">"Alphabetically: Z - A</option>
-              <option value="HIGH_LOW">"Rating: High to Low</option>
-              <option value="LOW_HIGH">"Rating: Low to High</option>
+              <option value="Z_A">Alphabetically: Z - A</option>
+              <option value="HIGH_LOW">Rating: High to Low</option>
+              <option value="LOW_HIGH">Rating: Low to High</option>
             </select>
           </div>
           <div className="cards-container">
             <div className="cards">
+              {loading &&
+                new Array(8).fill(0).map((e) => (
+                  <div className="loading--wrapper">
+                    <div className="card--loading">
+                      <figure className="poster--wrapper--loading"></figure>
+                      <div className="card__info loading">
+                        <h3 className="title loading "></h3>
+                        <div className="year loading"></div>
+                        <div className="director loading"></div>
+                        <div className="starring loading"></div>
+                        <div className="genre loading"></div>
+                        <div className="rating loading"></div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               {searchData.map((movie) => {
                 return (
-                  <Link to={MovieInfo} className="card--wrapper">
+                  <Link
+                    to={MovieInfo}
+                    className="card--wrapper"
+                    key={movie.imdbID}
+                  >
                     <div className="card">
                       <div className="hover-desc">{movie.Plot}</div>
                       <figure className="poster--wrapper">
@@ -87,14 +110,7 @@ function Search() {
                           <b>Genre:</b> {movie.Genre}
                         </div>
                         <div className="rating">
-                          <FontAwesomeIcon className="star" icon={faStar} />
-                          <FontAwesomeIcon className="star" icon={faStar} />
-                          <FontAwesomeIcon className="star" icon={faStar} />
-                          <FontAwesomeIcon className="star" icon={faStar} />
-                          <FontAwesomeIcon
-                            className="star"
-                            icon={faStarHalfAlt}
-                          />
+                          {convertRating(movie.imdbRating)}
                         </div>
                       </div>
                     </div>

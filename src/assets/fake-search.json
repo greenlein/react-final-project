@@ -1,0 +1,76 @@
+{
+  "Search": [
+    {
+      "Title": "National Treasure",
+      "Year": "2004",
+      "imdbID": "tt0368891",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMTY3NTc4OTYxMF5BMl5BanBnXkFtZTcwMjk5NzUyMw@@._V1_SX300.jpg"
+    },
+    {
+      "Title": "National Treasure: Book of Secrets",
+      "Year": "2007",
+      "imdbID": "tt0465234",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMjEwMjUyOTQ0MF5BMl5BanBnXkFtZTYwODA2Njk3._V1_SX300.jpg"
+    },
+    {
+      "Title": "National Lampoon's Christmas Vacation",
+      "Year": "1989",
+      "imdbID": "tt0097958",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BZDgxYzI2YWItNmUyNS00ZWE4LWEzZDctYTk1M2VkYjhkOWVmXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+      "Title": "National Lampoon's Animal House",
+      "Year": "1978",
+      "imdbID": "tt0077975",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BZjk2ODY5N2UtMzczOC00M2M1LWEzZDQtZTc2YTgzMGNhOWZiXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+      "Title": "National Lampoon's Vacation",
+      "Year": "1983",
+      "imdbID": "tt0085995",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BOWQ3ZTg3MzYtOGU0Yi00NjgyLWFkNmMtMWFlZWE3MTkyOTdlXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+      "Title": "National Lampoon's European Vacation",
+      "Year": "1985",
+      "imdbID": "tt0089670",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BNGIwMGZlZDUtOWVlNS00Nzg3LWI2MjUtZTUxYjVmNTVlZTE0XkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+      "Title": "National Security",
+      "Year": "2003",
+      "imdbID": "tt0271668",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMGFlOWI3MjctMjkwZi00ZGQ5LTgyYzgtNjU1ZjQwNGQ4ZDUzXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+      "Title": "National Treasure: Edge of History",
+      "Year": "2022–2023",
+      "imdbID": "tt12580982",
+      "Type": "series",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BZTQ1MjY0ZjktMGEzMi00N2RjLTg2OTYtYzI2YWU0NzVlNzg5XkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+      "Title": "National Velvet",
+      "Year": "1944",
+      "imdbID": "tt0037120",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BNWY0MGFkMzItNjc5MS00ZjhmLThlY2UtMWRiNjkxZTJjNjA2XkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+      "Title": "National Lampoon's Senior Trip",
+      "Year": "1995",
+      "imdbID": "tt0113936",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BOGJiNGU2ZmItYmJiZi00MGI2LWFiMjAtNDhiNDQ3ODY5ZDg0XkEyXkFqcGc@._V1_SX300.jpg"
+    }
+  ],
+  "totalResults": "1654",
+  "Response": "True"
+}

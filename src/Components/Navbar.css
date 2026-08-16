@@ -26,6 +26,8 @@
   font-size: 40px;
   letter-spacing: 2px;
   transform: translateX(-8px);
+  color: white;
+  text-decoration: underline;
 }
 
 .nav-header {

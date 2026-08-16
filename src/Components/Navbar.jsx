@@ -1,25 +1,36 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 function Navbar() {
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchInputRef = useRef(null);
+
+  function goToSearch() {
+    const query = searchInputRef.current.value;
+    if (query) {
+      navigate(`/results?search_query=${query}`);
+    }
+  }
+
   return (
     <>
       <div>
         <div className="container navbar-container">
           <div className="row">
             <div className="nav-header">
-              <div className="logo">
+              <Link to="/" className="logo">
                 <figure className="logo__img--wrapper">
                   <img src={logo} alt="" className="logo__img" />
                 </figure>
                 <span className="logo__text">
                   eb<span className="text--accent">flix</span>
                 </span>
-              </div>
+              </Link>
               <div className="nav-header__links">
                 <Link to="/">Home</Link>
                 <Link to="/">Favorites</Link>
@@ -33,10 +44,15 @@ function Navbar() {
                   type="text"
                   placeholder="Search by Title"
                   className="nav-footer__input"
+                  ref={searchInputRef}
+                  onKeyDown={(event) => {
+                    event.key === "Enter" && goToSearch();
+                  }}
                 />
                 <FontAwesomeIcon
                   className="nav-footer__input--icon"
                   icon={faMagnifyingGlass}
+                  onClick={goToSearch}
                 />
               </div>
             </div>

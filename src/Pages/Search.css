@@ -1,0 +1,85 @@
+.search-header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
+}
+
+.cards-container {
+  width: 100%;
+  margin-top: 32px;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.card--wrapper {
+  padding-right: 32px;
+  margin-bottom: 48px;
+  width: calc(100% / 3);
+  position: relative;
+  transition: all 225ms ease;
+}
+
+.hover-desc {
+  top: 40%;
+  left: 50px;
+  transform: translateY(-40%);
+  width: 70%;
+  position: absolute;
+  color: white;
+  font-size: 24px;
+  z-index: 1000;
+  opacity: 0;
+  transition: all 300ms ease;
+  text-align: center;
+}
+
+.card--wrapper:hover {
+  transform: scale(0.98);
+}
+
+.card--wrapper:hover .hover-desc {
+  opacity: 1;
+}
+
+.card--wrapper:hover::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: 0;
+  width: 100%;
+  height: 110%;
+  margin-right: 32px;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 8px;
+  z-index: 999;
+}
+
+.card {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.poster--wrapper {
+  width: 55%;
+}
+
+.poster {
+  border-radius: 4px;
+}
+
+.card__info {
+  width: 40%;
+  padding-left: 16px;
+}
+
+.rating {
+  display: flex;
+  flex-wrap: none;
+}

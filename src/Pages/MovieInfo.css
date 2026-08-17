@@ -1,0 +1,12 @@
+.card {
+  margin: 64px 0 0 16px;
+}
+
+.poster--wrapper {
+  max-width: 500px;
+}
+
+.rating-icon {
+  width: 24px;
+  height: 24px;
+}

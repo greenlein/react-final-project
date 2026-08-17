@@ -6,7 +6,11 @@ function convertRating(rating) {
   const starRating = Math.round(rating) / 2;
   let stars = [];
 
-  for (let i = 0; i < Math.ceil(starRating); i++) {
+  for (let i = 0; i < Math.floor(starRating); i++) {
+    if (!starRating) {
+      return "Rating Unavailable!";
+    }
+
     stars.push(
       <FontAwesomeIcon key={`full-${i}`} className="star" icon={faStar} />,
     );

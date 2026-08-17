@@ -1,10 +1,11 @@
-import React, { use } from "react";
+import React, { useRef } from "react";
 import "./Search.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import poster from "../assets/movie-poster.jpg";
 import { Link } from "react-router-dom";
 import MovieInfo from "./MovieInfo";
+import filmReel from "../assets/film-reel.png";
 import { useState, useEffect } from "react";
 import fakeSearch from "../assets/fake-search.json";
 import fakeInfo from "../assets/fake-movie-info.json";
@@ -18,13 +19,14 @@ function Search() {
   const [loading, setLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("search_query");
+  const sortRef = useRef("placeholder");
+  const [isUnavailable, setIsUnavailable] = useState(false);
 
   async function fetchSearchData() {
     if (!searchQuery) {
       setSearchData([]);
       return;
     }
-    // const searchRes = fakeSearch.Search.filter((item) => item.Type === "movie");
 
     const { data } = await axios.get(
       `http://www.omdbapi.com/?s=${searchQuery}&apikey=${API_KEY}`,
@@ -40,14 +42,43 @@ function Search() {
       }),
     );
 
-    setSearchData(combinedData);
+    if (sortRef.current.value !== "placeholder") {
+      sortBy(combinedData);
+    } else {
+      setSearchData(combinedData);
+    }
     setLoading(false);
   }
-  console.log(searchData);
 
   useEffect(() => {
+    setIsUnavailable(false);
     fetchSearchData();
+
+    const timer = setTimeout(() => {
+      setIsUnavailable(true);
+    }, 900);
+
+    return () => clearTimeout(timer);
   }, [searchQuery]);
+
+  function sortBy(data) {
+    const value = sortRef.current.value;
+    const sortedMovies = [...data];
+
+    value === "A_Z" &&
+      sortedMovies.sort((a, b) => a.Title.localeCompare(b.Title));
+
+    value === "Z_A" &&
+      sortedMovies.sort((a, b) => b.Title.localeCompare(a.Title));
+
+    value === "HIGH_LOW" &&
+      sortedMovies.sort((a, b) => b.imdbRating - a.imdbRating);
+
+    value === "LOW_HIGH" &&
+      sortedMovies.sort((a, b) => a.imdbRating - b.imdbRating);
+
+    setSearchData(sortedMovies);
+  }
 
   return (
     <div>
@@ -57,7 +88,12 @@ function Search() {
             <span>
               <b>Search results:</b>
             </span>
-            <select defaultValue="placeholder" className="sort-filter">
+            <select
+              ref={sortRef}
+              defaultValue="placeholder"
+              className="sort-filter"
+              onChange={() => sortBy(searchData)}
+            >
               <option value="placeholder" disabled>
                 Sort By:
               </option>
@@ -70,8 +106,8 @@ function Search() {
           <div className="cards-container">
             <div className="cards">
               {loading &&
-                new Array(8).fill(0).map((e) => (
-                  <div className="loading--wrapper">
+                new Array(8).fill(1, 8).map((e) => (
+                  <div className="loading--wrapper" key={e}>
                     <div className="card--loading">
                       <figure className="poster--wrapper--loading"></figure>
                       <div className="card__info loading">
@@ -88,27 +124,45 @@ function Search() {
               {searchData.map((movie) => {
                 return (
                   <Link
-                    to={MovieInfo}
+                    to={`/movie/${movie.imdbID}`}
                     className="card--wrapper"
                     key={movie.imdbID}
                   >
                     <div className="card">
-                      <div className="hover-desc">{movie.Plot}</div>
+                      <div className="hover-desc">
+                        {movie.Plot !== "N/A"
+                          ? movie.Plot
+                          : "Plot unavailable!"}
+                      </div>
                       <figure className="poster--wrapper">
                         <img src={movie.Poster} alt="" className="poster" />
+
+                        {isUnavailable && (
+                          <div className="poster-unavailable">
+                            <span className="unavailable--text">
+                              Poster Unavailable!
+                            </span>
+                            <img
+                              src={filmReel}
+                              alt=""
+                              className="unavailable--img"
+                            />
+                          </div>
+                        )}
                       </figure>
                       <div className="card__info">
-                        <h3 className="title">{movie.Title}</h3>
-                        <div className="year">{movie.Year}</div>
-                        <div className="director">
+                        <h3 className="title card__item">{movie.Title}</h3>
+                        <div className="year card__item">{movie.Year}</div>
+                        <div className="director card__item">
                           <b>Director:</b> {movie.Director}
                         </div>
-                        <div className="starring">
+                        <div className="starring card__item">
                           <b>Starring:</b> {movie.Actors}
                         </div>
-                        <div className="genre">
+                        <div className="genre card__item">
                           <b>Genre:</b> {movie.Genre}
                         </div>
+                        <b>IMDb Rating:</b>
                         <div className="rating">
                           {convertRating(movie.imdbRating)}
                         </div>

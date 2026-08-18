@@ -25,7 +25,7 @@ function Home() {
       const response = await axios.request(options);
       //Get poster from OMDb
       const { data } = await axios.get(
-        `http://www.omdbapi.com/?t=${response.data.movie}&apikey=${API_KEY}`,
+        `https://www.omdbapi.com/?t=${response.data.movie}&apikey=${API_KEY}`,
       );
 
       const img = new Image();

@@ -30,14 +30,14 @@ function Search() {
     }
 
     const { data } = await axios.get(
-      `http://www.omdbapi.com/?s=${searchQuery}&apikey=${API_KEY}`,
+      `https://www.omdbapi.com/?s=${searchQuery}&apikey=${API_KEY}`,
     );
     const searchRes = data.Search.filter((item) => item.Type === "movie");
 
     const combinedData = await Promise.all(
       searchRes.map(async (movie) => {
         const { data } = await axios.get(
-          `http://www.omdbapi.com/?i=${movie.imdbID}&apikey=${API_KEY}`,
+          `https://www.omdbapi.com/?i=${movie.imdbID}&apikey=${API_KEY}`,
         );
 
         console.log(movie.imdbRating);
@@ -149,7 +149,11 @@ function Search() {
                           : "Plot unavailable!"}
                       </div>
                       <figure className="search-poster--wrapper">
-                        <img src={movie.Poster} alt="" className="search-poster" />
+                        <img
+                          src={movie.Poster}
+                          alt=""
+                          className="search-poster"
+                        />
 
                         {isUnavailable && (
                           <div className="poster-unavailable">
@@ -177,7 +181,7 @@ function Search() {
                           <b>Genre:</b> {movie.Genre}
                         </div>
                         <div className="rating card__item">
-                          <b>IMDb Rating:</b> &nbsp; 
+                          <b>IMDb Rating:</b> &nbsp;
                           {convertRating(movie.imdbRating)}
                         </div>
                       </div>

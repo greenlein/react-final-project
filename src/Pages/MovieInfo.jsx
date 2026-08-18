@@ -14,7 +14,7 @@ function MovieInfo() {
 
   async function fetchMovie() {
     const { data } = await axios.get(
-      `http://www.omdbapi.com/?i=${imdbId}&apikey=${API_KEY}`,
+      `https://www.omdbapi.com/?i=${imdbId}&apikey=${API_KEY}`,
     );
     setMovie(data);
   }

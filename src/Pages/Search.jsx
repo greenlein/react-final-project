@@ -119,22 +119,23 @@ function Search() {
           </div>
           <div className="cards-container">
             <div className="cards">
-              {loading &&
-                new Array(8).fill(1, 8).map((e) => (
-                  <div className="loading--wrapper" key={e}>
-                    <div className="card--loading">
-                      <figure className="poster--wrapper--loading"></figure>
-                      <div className="card__info loading">
-                        <h3 className="title loading "></h3>
-                        <div className="year loading"></div>
-                        <div className="director loading"></div>
-                        <div className="starring loading"></div>
-                        <div className="genre loading"></div>
-                        <div className="rating loading"></div>
+              {(loading === true && searchQuery)
+                ? new Array(8).fill(1).map((e) => (
+                    <div className="loading--wrapper" key={e}>
+                      <div className="card--loading">
+                        <figure className="search-poster--wrapper--loading"></figure>
+                        <div className="card__info loading">
+                          <h3 className="title loading "></h3>
+                          <div className="year loading"></div>
+                          <div className="director loading"></div>
+                          <div className="starring loading"></div>
+                          <div className="genre loading"></div>
+                          <div className="rating loading"></div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                : ""}
               {searchData.map((movie) => {
                 return (
                   <Link
@@ -169,20 +170,24 @@ function Search() {
                         )}
                       </figure>
                       <div className="card__info">
-                        <h3 className="title card__item">{movie.Title}</h3>
-                        <div className="year card__item">{movie.Year}</div>
-                        <div className="director card__item">
-                          <b>Director:</b> {movie.Director}
+                        <div className="card__info--col">
+                          <h3 className="title card__item">{movie.Title}</h3>
+                          <div className="year card__item">{movie.Year}</div>
+                          <div className="director card__item">
+                            <b>Director:</b> {movie.Director}
+                          </div>
+                          <div className="starring card__item">
+                            <b>Starring:</b> {movie.Actors}
+                          </div>
                         </div>
-                        <div className="starring card__item">
-                          <b>Starring:</b> {movie.Actors}
-                        </div>
-                        <div className="genre card__item">
-                          <b>Genre:</b> {movie.Genre}
-                        </div>
-                        <div className="rating card__item">
-                          <b>IMDb Rating:</b> &nbsp;
-                          {convertRating(movie.imdbRating)}
+                        <div className="card__info--col">
+                          <div className="genre card__item">
+                            <b>Genre:</b> {movie.Genre}
+                          </div>
+                          <div className="rating card__item">
+                            <b>IMDb Rating:</b> &nbsp;
+                            <span className="stars">{convertRating(movie.imdbRating)}</span>
+                          </div>
                         </div>
                       </div>
                     </div>

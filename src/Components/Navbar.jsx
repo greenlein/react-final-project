@@ -20,10 +20,10 @@ function Navbar() {
   return (
     <>
       <div>
-        <div className="container navbar-container">
+        <div className="navbar-container">
           <div className="row">
             <div className="nav-header">
-              <Link to="/" className="logo">
+              <Link to="/" className="logo no-underline">
                 <figure className="logo__img--wrapper">
                   <img src={logo} alt="" className="logo__img" />
                 </figure>

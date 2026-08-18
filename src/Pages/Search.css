@@ -1,8 +1,8 @@
 .search-header {
   display: flex;
   justify-content: space-between;
-  margin-top: 32px;
-  margin: 32px 16px 0 16px;
+  padding-top: 32px;
+  margin: 0 16px;
 }
 
 .sort-filter {
@@ -35,25 +35,11 @@
 }
 
 .card--wrapper {
-  padding-right: 32px;
+  padding-right: 8px;
   margin-bottom: 48px;
   width: calc(100% / 3);
   position: relative;
   transition: all 225ms ease;
-}
-
-.hover-desc {
-  top: 40%;
-  left: 50px;
-  transform: translateY(-40%);
-  width: 70%;
-  position: absolute;
-  color: white;
-  font-size: 24px;
-  z-index: 1000;
-  opacity: 0;
-  transition: all 300ms ease;
-  text-align: center;
 }
 
 .card--wrapper:hover {
@@ -77,6 +63,20 @@
   z-index: 999;
 }
 
+.hover-desc {
+  top: 40%;
+  left: 50px;
+  transform: translateY(-40%);
+  width: 70%;
+  position: absolute;
+  color: white;
+  font-size: 24px;
+  z-index: 1000;
+  opacity: 0;
+  transition: all 300ms ease;
+  text-align: center;
+}
+
 .card {
   display: flex;
   width: 100%;
@@ -84,18 +84,13 @@
   overflow: hidden;
 }
 
-.poster--wrapper {
+.search-poster--wrapper {
   width: 55%;
   position: relative;
 }
 
-.poster {
-  border-radius: 4px;
-  z-index: 1;
-}
-
 .card__info {
-  width: 40%;
+  width: 50%;
   padding-left: 16px;
 }
 
@@ -121,6 +116,26 @@
   flex-wrap: none;
 }
 
+.search-now-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  height: 400px;
+}
+
+.prompt__img--wrapper {
+  width: 450px;
+  transform: translateX(-5px);
+  filter: sepia(58%) blur(0.83px);
+}
+
+.prompt__text {
+  transform: translateY(-10px);
+  font-size: 20px;
+}
+
 .loading--wrapper {
   width: calc(100% / 3);
   padding-right: 32px;
@@ -133,7 +148,7 @@
   height: 400px;
 }
 
-.poster--wrapper--loading {
+.search-poster--wrapper--loading {
   width: 55%;
   height: 100%;
   background-color: #e2e8f0; /* Fallback base gray */
@@ -155,21 +170,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.unavailable--text {
-  position: absolute;
-  font-weight: 700;
-  font-size: 20px;
-  top: 24px;
-  z-index: -1;
-}
-
-.unavailable--img {
-  position: absolute;
-  width: 160px;
-  top: 48px;
-  z-index: -1;
 }
 
 .card__info.loading {
@@ -196,6 +196,21 @@
   background-size: 200% 100%;
   background-position: 100% 0;
   animation: shimmer 1.5s infinite linear;
+}
+
+.unavailable--text {
+  position: absolute;
+  font-weight: 700;
+  font-size: 20px;
+  top: 24px;
+  z-index: -1;
+}
+
+.unavailable--img {
+  position: absolute;
+  width: 160px;
+  top: 48px;
+  z-index: -1;
 }
 
 @keyframes shimmer {

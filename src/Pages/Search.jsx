@@ -13,6 +13,7 @@ import { useSearchParams } from "react-router-dom";
 import { API_KEY } from "../assets/API_KEY.js";
 import axios from "axios";
 import convertRating from "../Components/convertRating.jsx";
+import popcorn from "../assets/popcorn.png";
 
 function Search() {
   const [searchData, setSearchData] = useState([]);
@@ -38,6 +39,9 @@ function Search() {
         const { data } = await axios.get(
           `http://www.omdbapi.com/?i=${movie.imdbID}&apikey=${API_KEY}`,
         );
+
+        console.log(movie.imdbRating);
+
         return { ...movie, ...data };
       }),
     );
@@ -46,12 +50,13 @@ function Search() {
       sortBy(combinedData);
     } else {
       setSearchData(combinedData);
+      setLoading(false);
     }
-    setLoading(false);
   }
 
   useEffect(() => {
     setIsUnavailable(false);
+    setLoading(true);
     fetchSearchData();
 
     const timer = setTimeout(() => {
@@ -72,17 +77,26 @@ function Search() {
       sortedMovies.sort((a, b) => b.Title.localeCompare(a.Title));
 
     value === "HIGH_LOW" &&
-      sortedMovies.sort((a, b) => b.imdbRating - a.imdbRating);
+      sortedMovies.sort((a, b) => {
+        if (a.imdbRating === "N/A") return 1;
+        if (b.imdbRating === "N/A") return -1;
+        return b.imdbRating - a.imdbRating;
+      });
 
     value === "LOW_HIGH" &&
-      sortedMovies.sort((a, b) => a.imdbRating - b.imdbRating);
+      sortedMovies.sort((a, b) => {
+        if (a.imdbRating === "N/A") return 1;
+        if (b.imdbRating === "N/A") return -1;
+        return a.imdbRating - b.imdbRating;
+      });
 
     setSearchData(sortedMovies);
+    setLoading(false);
   }
 
   return (
     <div>
-      <div className="container">
+      <div className="container search-container">
         <div className="row">
           <div className="search-header">
             <span>
@@ -125,7 +139,7 @@ function Search() {
                 return (
                   <Link
                     to={`/movie/${movie.imdbID}`}
-                    className="card--wrapper"
+                    className="card--wrapper no-underline"
                     key={movie.imdbID}
                   >
                     <div className="card">
@@ -134,8 +148,8 @@ function Search() {
                           ? movie.Plot
                           : "Plot unavailable!"}
                       </div>
-                      <figure className="poster--wrapper">
-                        <img src={movie.Poster} alt="" className="poster" />
+                      <figure className="search-poster--wrapper">
+                        <img src={movie.Poster} alt="" className="search-poster" />
 
                         {isUnavailable && (
                           <div className="poster-unavailable">
@@ -162,8 +176,8 @@ function Search() {
                         <div className="genre card__item">
                           <b>Genre:</b> {movie.Genre}
                         </div>
-                        <b>IMDb Rating:</b>
-                        <div className="rating">
+                        <div className="rating card__item">
+                          <b>IMDb Rating:</b> &nbsp; 
                           {convertRating(movie.imdbRating)}
                         </div>
                       </div>
@@ -173,6 +187,16 @@ function Search() {
               })}
             </div>
           </div>
+          {!searchQuery && (
+            <div className="search-now-prompt">
+              <figure className="prompt__img--wrapper">
+                <img src={popcorn} alt="" className="prompt__img" />
+              </figure>
+              <h4 className="prompt__text">
+                Search any title above to get started.
+              </h4>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -5,15 +5,15 @@ import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import poster from "../assets/movie-poster.jpg";
 import { Link } from "react-router-dom";
 import MovieInfo from "./MovieInfo";
-import filmReel from "../assets/film-reel.png";
+import filmReel from "/film-reel.png";
 import { useState, useEffect } from "react";
 import fakeSearch from "../assets/fake-search.json";
 import fakeInfo from "../assets/fake-movie-info.json";
 import { useSearchParams } from "react-router-dom";
-import { API_KEY } from "../assets/API_KEY.js";
+import { API_KEY } from "../assets/OMDB_API_KEY.js";
 import axios from "axios";
 import convertRating from "../Components/convertRating.jsx";
-import popcorn from "../assets/popcorn.png";
+import popcorn from "/popcorn.png";
 
 function Search() {
   const [searchData, setSearchData] = useState([]);

@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import "./Navbar.css";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import logo from "../assets/logo.png";
+import logo from "/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 

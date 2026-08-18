@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { API_KEY } from "../assets/API_KEY";
+import { API_KEY } from "../assets/OMDB_API_KEY";
 import { useParams } from "react-router-dom";
 import "./MovieInfo.css";
-import fresh from "../assets/fresh.png";
-import rotten from "../assets/rotten.png";
-import metacritic from "../assets/metacritic.png";
-import imdb from "../assets/imdb.png";
+import fresh from "/fresh.png";
+import rotten from "/rotten.png";
+import metacritic from "/metacritic.png";
+import imdb from "/imdb.png";
 
 function MovieInfo() {
   const [movie, setMovie] = useState({});
